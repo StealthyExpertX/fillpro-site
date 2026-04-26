@@ -32,10 +32,14 @@
     function update() {
       frame = 0;
 
-      var scrollHeight = Math.max(document.documentElement.scrollHeight, body.scrollHeight);
+      var scrollHeight = Math.max(
+        document.documentElement.scrollHeight,
+        body.scrollHeight,
+      );
       var visibleHeight = window.innerHeight;
       var scrollable = Math.max(scrollHeight - visibleHeight, 0);
-      var progress = scrollable === 0 ? 0 : Math.min(window.scrollY / scrollable, 1);
+      var progress =
+        scrollable === 0 ? 0 : Math.min(window.scrollY / scrollable, 1);
 
       setRootVar('--scroll-progress', progress.toFixed(4));
     }
@@ -64,7 +68,7 @@
       '.split-layout > *',
       '.support-grid > *',
       '.contact-card',
-      '.page > .boundary-card'
+      '.page > .boundary-card',
     ];
     var seen = new Set();
     var targets = [];
@@ -82,7 +86,10 @@
 
     targets.forEach(function (element, index) {
       element.setAttribute('data-reveal', '');
-      element.style.setProperty('--reveal-delay', String(Math.min((index % 7) * 55, 330)) + 'ms');
+      element.style.setProperty(
+        '--reveal-delay',
+        String(Math.min((index % 7) * 55, 330)) + 'ms',
+      );
     });
 
     if (reduceMotionQuery.matches || !('IntersectionObserver' in window)) {
@@ -92,54 +99,26 @@
       return;
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) {
-          return;
-        }
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
 
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, {
-      threshold: 0.14,
-      rootMargin: '0px 0px -8% 0px'
-    });
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    );
 
     targets.forEach(function (element) {
       observer.observe(element);
     });
-  }
-
-  function setupAmbientGlow() {
-    if (reduceMotionQuery.matches || !finePointerQuery.matches) {
-      return;
-    }
-
-    var frame = 0;
-    var glowX = 50;
-    var glowY = 18;
-
-    function render() {
-      frame = 0;
-      setRootVar('--page-glow-x', glowX.toFixed(2) + '%');
-      setRootVar('--page-glow-y', glowY.toFixed(2) + '%');
-    }
-
-    window.addEventListener('pointermove', function (event) {
-      if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
-        return;
-      }
-
-      glowX = (event.clientX / window.innerWidth) * 100;
-      glowY = Math.max(10, (event.clientY / window.innerHeight) * 100);
-
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(render);
-    }, { passive: true });
   }
 
   function setupCardSpots() {
@@ -147,7 +126,9 @@
       return;
     }
 
-    var cards = document.querySelectorAll('.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card');
+    var cards = document.querySelectorAll(
+      '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card',
+    );
 
     cards.forEach(function (card) {
       var frame = 0;
@@ -171,22 +152,33 @@
         frame = window.requestAnimationFrame(render);
       }
 
-      card.addEventListener('pointermove', function (event) {
-        var rect = card.getBoundingClientRect();
-        var nextX = ((event.clientX - rect.left) / rect.width) * 100;
-        var nextY = ((event.clientY - rect.top) / rect.height) * 100;
+      card.addEventListener('pointerenter', function () {
+        card.style.setProperty('--spot-alpha', '0.16');
+      });
 
-        queueRender(nextX, nextY);
-      }, { passive: true });
+      card.addEventListener(
+        'pointermove',
+        function (event) {
+          var rect = card.getBoundingClientRect();
+          var nextX = ((event.clientX - rect.left) / rect.width) * 100;
+          var nextY = ((event.clientY - rect.top) / rect.height) * 100;
+
+          queueRender(nextX, nextY);
+        },
+        { passive: true },
+      );
 
       card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--spot-alpha', '0.035');
         queueRender(50, 50);
       });
     });
   }
 
   function setupQuickLinkState() {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.quick-links a[href^="#"]'));
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('.quick-links a[href^="#"]'),
+    );
 
     if (links.length === 0) {
       return;
@@ -221,18 +213,25 @@
       return;
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-      var visible = entries
-        .filter(function (entry) { return entry.isIntersecting; })
-        .sort(function (left, right) { return right.intersectionRatio - left.intersectionRatio; });
+    var observer = new IntersectionObserver(
+      function (entries) {
+        var visible = entries
+          .filter(function (entry) {
+            return entry.isIntersecting;
+          })
+          .sort(function (left, right) {
+            return right.intersectionRatio - left.intersectionRatio;
+          });
 
-      if (visible.length > 0) {
-        markActive(visible[0].target);
-      }
-    }, {
-      threshold: [0.2, 0.45, 0.7],
-      rootMargin: '-18% 0px -52% 0px'
-    });
+        if (visible.length > 0) {
+          markActive(visible[0].target);
+        }
+      },
+      {
+        threshold: [0.2, 0.45, 0.7],
+        rootMargin: '-18% 0px -52% 0px',
+      },
+    );
 
     items.forEach(function (item) {
       observer.observe(item.target);
@@ -244,7 +243,6 @@
   installProgressBar();
   setupScrollProgress();
   setupReveal();
-  setupAmbientGlow();
   setupCardSpots();
   setupQuickLinkState();
-}());
+})();

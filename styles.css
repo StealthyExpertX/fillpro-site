@@ -21,10 +21,9 @@
   --copy: 720px;
   --radius: 8px;
   --radius-lg: 18px;
-  --page-glow-x: 50%;
-  --page-glow-y: 18%;
   --spot-x: 50%;
   --spot-y: 50%;
+  --spot-alpha: 0.035;
   --shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
   --shadow-soft: 0 22px 70px rgba(0, 0, 0, 0.36);
   --shadow-brand: 0 24px 70px rgba(17, 121, 115, 0.22);
@@ -42,13 +41,12 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at var(--page-glow-x) var(--page-glow-y), rgba(117, 216, 255, 0.12), transparent 22%),
-    radial-gradient(circle at 14% 18%, rgba(157, 231, 215, 0.16), transparent 20%),
-    radial-gradient(circle at 84% 10%, rgba(19, 138, 127, 0.16), transparent 18%),
-    linear-gradient(180deg, #071217 0%, #08161d 32%, #071217 100%);
+    linear-gradient(180deg, rgba(12, 31, 38, 0.82) 0%, transparent 38%),
+    linear-gradient(180deg, #071217 0%, #08161d 42%, #061015 100%);
   color: var(--text);
   font: 16px/1.62 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
@@ -61,7 +59,7 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -2;
+  z-index: 0;
 }
 
 body::before {
@@ -70,16 +68,27 @@ body::before {
     linear-gradient(90deg, rgba(157, 231, 215, 0.05) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 88%);
-  opacity: 0.28;
+  opacity: 0.22;
 }
 
 body::after {
-  z-index: -1;
   background:
-    radial-gradient(circle 260px at var(--page-glow-x) var(--page-glow-y), rgba(157, 231, 215, 0.16), transparent 72%),
-    radial-gradient(circle 220px at calc(var(--page-glow-x) + 12%) calc(var(--page-glow-y) + 10%), rgba(117, 216, 255, 0.09), transparent 72%);
-  opacity: 0.9;
-  transition: opacity 220ms ease;
+    linear-gradient(116deg, transparent 0 18%, rgba(157, 231, 215, 0.08) 36%, transparent 56% 100%),
+    linear-gradient(42deg, transparent 0 24%, rgba(117, 216, 255, 0.065) 44%, transparent 62% 100%),
+    linear-gradient(180deg, rgba(157, 231, 215, 0.035), transparent 44%);
+  background-size: 180% 180%, 160% 160%, 100% 100%;
+  background-position: 18% 8%, 82% 14%, center;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.74) 45%, transparent 94%);
+  opacity: 0.92;
+  animation: ambientField 18s ease-in-out infinite alternate;
+  will-change: background-position, opacity;
+}
+
+.site-header,
+main,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 img {
@@ -135,6 +144,12 @@ main,
   align-items: center;
   gap: 12px;
   min-width: 0;
+  border-radius: 18px;
+  transition: transform 220ms var(--ease-out);
+}
+
+.brand:hover {
+  transform: translateY(-1px);
 }
 
 .brand-logo {
@@ -145,6 +160,20 @@ main,
   background: linear-gradient(180deg, rgba(157, 231, 215, 0.14), rgba(117, 216, 255, 0.04));
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(157, 231, 215, 0.08);
   flex: 0 0 auto;
+  transition: border-color 220ms ease, box-shadow 220ms ease, outline-color 220ms ease, transform 220ms var(--ease-out);
+}
+
+.brand:hover .brand-logo {
+  outline: 2px solid rgba(157, 231, 215, 0.26);
+  outline-offset: 4px;
+  border-color: rgba(157, 231, 215, 0.58);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.3), 0 0 26px rgba(157, 231, 215, 0.16);
+  transform: rotate(-2deg) scale(1.025);
+  animation: logoOutlinePulse 1.45s ease-in-out infinite;
+}
+
+.brand:hover .brand-title {
+  color: #f7fffd;
 }
 
 .brand-lockup {
@@ -189,6 +218,16 @@ main,
     transform 180ms var(--ease-out);
 }
 
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 18%, rgba(255, 255, 255, 0.18), transparent 72%);
+  opacity: 0;
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -215,6 +254,11 @@ main,
 .nav-links a[aria-current='page']::after {
   transform: scaleX(1);
   opacity: 1;
+}
+
+.nav-links a:hover::before {
+  opacity: 1;
+  animation: shineSweep 1.35s var(--ease-out) infinite;
 }
 
 main {
@@ -276,9 +320,9 @@ main {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(157, 231, 215, 0.12), transparent 34%),
+    radial-gradient(420px circle at var(--spot-x) var(--spot-y), rgba(157, 231, 215, var(--spot-alpha)), transparent 42%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 42%);
-  opacity: 0.88;
+  opacity: 1;
   pointer-events: none;
   z-index: -1;
 }
@@ -598,6 +642,7 @@ p {
     border-color 220ms ease,
     box-shadow 220ms ease,
     background 220ms ease;
+  contain: paint;
 }
 
 .feature-card:hover,
@@ -612,6 +657,72 @@ p {
   transform: translateY(-4px);
   border-color: rgba(157, 231, 215, 0.3);
   box-shadow: 0 26px 64px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(157, 231, 215, 0.07);
+  --spot-alpha: 0.14;
+}
+
+.meta a,
+.footer-inner a,
+.boundary-card p a,
+.contact-card a,
+.support-card a,
+.info-card a,
+.feature-card a,
+.policy-card a,
+.release-card a {
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+  color: var(--soft);
+  background-image: linear-gradient(90deg, rgba(157, 231, 215, 0.64), rgba(117, 216, 255, 0.64));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  overflow: hidden;
+  transition: color 180ms ease, background-size 180ms ease;
+}
+
+.meta a::before,
+.footer-inner a::before,
+.boundary-card p a::before,
+.contact-card a::before,
+.support-card a::before,
+.info-card a::before,
+.feature-card a::before,
+.policy-card a::before,
+.release-card a::before {
+  content: "";
+  position: absolute;
+  inset: -2px -8px;
+  background: linear-gradient(105deg, transparent 16%, rgba(255, 255, 255, 0.28), transparent 70%);
+  opacity: 0;
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
+.meta a:hover,
+.footer-inner a:hover,
+.boundary-card p a:hover,
+.contact-card a:hover,
+.support-card a:hover,
+.info-card a:hover,
+.feature-card a:hover,
+.policy-card a:hover,
+.release-card a:hover {
+  color: var(--text);
+  background-size: 100% 2px;
+}
+
+.meta a:hover::before,
+.footer-inner a:hover::before,
+.boundary-card p a:hover::before,
+.contact-card a:hover::before,
+.support-card a:hover::before,
+.info-card a:hover::before,
+.feature-card a:hover::before,
+.policy-card a:hover::before,
+.release-card a:hover::before {
+  opacity: 1;
+  animation: shineSweep 1.5s var(--ease-out) infinite;
 }
 
 .preview-note-grid {
@@ -941,6 +1052,10 @@ textarea:focus-visible {
   transform: translateY(0) scale(1);
 }
 
+[data-reveal].is-visible:is(.feature-card, .info-card, .support-card, .policy-card, .release-card, .boundary-card, .mini-card, .surface, .contact-card):hover {
+  transform: translateY(-4px) scale(1);
+}
+
 .site-progress {
   position: fixed;
   top: 0;
@@ -992,6 +1107,7 @@ textarea:focus-visible {
 
 footer {
   border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, transparent, rgba(7, 18, 23, 0.58));
 }
 
 .footer-inner {
@@ -1003,6 +1119,45 @@ footer {
 
 .footer-inner a {
   color: var(--soft);
+}
+
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-130%);
+  }
+
+  62%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes logoOutlinePulse {
+  0%,
+  100% {
+    outline-color: rgba(157, 231, 215, 0.22);
+  }
+
+  50% {
+    outline-color: rgba(117, 216, 255, 0.48);
+  }
+}
+
+@keyframes ambientField {
+  0% {
+    background-position: 18% 8%, 82% 14%, center;
+    opacity: 0.84;
+  }
+
+  50% {
+    background-position: 42% 16%, 64% 22%, center;
+    opacity: 0.96;
+  }
+
+  100% {
+    background-position: 72% 10%, 28% 18%, center;
+    opacity: 0.9;
+  }
 }
 
 @media (max-width: 1020px) {
@@ -1203,7 +1358,19 @@ footer {
   .surface,
   .contact-card,
   .button,
+  .brand,
+  .brand-logo,
   .nav-links a,
+  .nav-links a::before,
+  .meta a::before,
+  .footer-inner a::before,
+  .boundary-card p a::before,
+  .contact-card a::before,
+  .support-card a::before,
+  .info-card a::before,
+  .feature-card a::before,
+  .policy-card a::before,
+  .release-card a::before,
   [data-reveal] {
     transition: none !important;
     animation: none !important;

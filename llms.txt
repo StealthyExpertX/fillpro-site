@@ -1,15 +1,15 @@
 # Stealthy Apps
 
-> Small, private browser tools built by an indie dev (Karl). No tracking, no analytics, no servers we run. Each app stores everything on the user's device.
+> Practical apps, plugins, extensions, and tools built by Karl with a privacy-first baseline. No tracking, no analytics, and no unnecessary accounts. Tools keep user data local whenever the feature can work that way.
 
-Stealthy Apps is a personal portfolio of focused browser extensions. The current product is FillPro. More are planned.
+Stealthy Apps is a personal portfolio for focused software projects. FillPro is the first public project. More apps, plugins, extensions, and tools are planned.
 
 ## About
 
-- Built by: Karl, solo indie developer
+- Built by: Karl
 - Brand: Stealthy Apps
 - Domain: stealthyapps.com
-- Philosophy: small tools, private by default, no dark patterns, no email gates, no analytics
+- Philosophy: useful tools, private by default, no dark patterns, no email gates, no analytics
 
 ## Products
 
