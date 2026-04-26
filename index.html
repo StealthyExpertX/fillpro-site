@@ -3,204 +3,162 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FillPro | Private Form Autofill</title>
-  <meta name="description" content="FillPro is a private Chrome extension for reusable form profiles, smart field matching, local upload matching, and clear support documentation.">
+  <title>Stealthy Apps — small, private browser tools by Karl</title>
+  <meta name="description" content="Stealthy Apps makes small, private Chrome and Firefox extensions. Built by Karl, a solo indie dev. No tracking, no analytics, no servers. Currently shipping FillPro — private form autofill.">
+  <meta name="keywords" content="indie browser extensions, private chrome extensions, indie developer, no tracking extensions, fillpro, stealthy apps">
+  <meta name="author" content="Karl">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
   <meta name="theme-color" content="#0b1a23">
+  <link rel="canonical" href="https://stealthyapps.com/">
   <link rel="icon" href="assets/fillpro-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Stealthy Apps">
+  <meta property="og:title" content="Stealthy Apps — small, private browser tools by Karl">
+  <meta property="og:description" content="Indie-made Chrome and Firefox extensions. No tracking, no analytics, no servers. Currently shipping FillPro — private form autofill.">
+  <meta property="og:url" content="https://stealthyapps.com/">
+  <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Stealthy Apps — small, private browser tools by Karl">
+  <meta name="twitter:description" content="Indie-made Chrome and Firefox extensions. No tracking, no analytics, no servers.">
+  <meta name="twitter:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Karl",
+        "jobTitle": "Indie software developer",
+        "url": "https://stealthyapps.com/about.html",
+        "knowsAbout": ["Browser extensions", "Web privacy", "Chrome extension development", "Firefox add-ons"]
+      },
+      {
+        "@type": "Organization",
+        "name": "Stealthy Apps",
+        "url": "https://stealthyapps.com/",
+        "logo": "https://stealthyapps.com/assets/fillpro-logo.svg",
+        "founder": { "@type": "Person", "name": "Karl" },
+        "description": "Indie studio building small, private browser extensions."
+      },
+      {
+        "@type": "WebSite",
+        "name": "Stealthy Apps",
+        "url": "https://stealthyapps.com/",
+        "publisher": { "@type": "Organization", "name": "Stealthy Apps" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "FillPro",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome, Edge, Firefox, Brave, Opera, Vivaldi, Arc",
+        "url": "https://stealthyapps.com/apps/fillpro/",
+        "offers": [
+          { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+          { "@type": "Offer", "price": "3.99", "priceCurrency": "USD", "name": "Pro monthly" },
+          { "@type": "Offer", "price": "29.99", "priceCurrency": "USD", "name": "Pro yearly" },
+          { "@type": "Offer", "price": "39.99", "priceCurrency": "USD", "name": "Pro lifetime" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="index.html">
-        <img class="brand-logo" src="assets/fillpro-logo.svg" alt="FillPro logo" width="48" height="48" decoding="async">
+      <a class="brand" href="/">
+        <img class="brand-logo" src="assets/fillpro-logo.svg" alt="Stealthy Apps logo" width="48" height="48" decoding="async">
         <span class="brand-lockup">
-          <span class="brand-title">FillPro</span>
-          <span class="brand-subtitle">Private form autofill</span>
+          <span class="brand-title">Stealthy Apps</span>
+          <span class="brand-subtitle">Small, private browser tools</span>
         </span>
       </a>
       <div class="nav-links">
-        <a href="support.html">Support</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="privacy-policy.html">Privacy</a>
-        <a href="support.html#contact">Contact</a>
+        <a href="/" aria-current="page">Home</a>
+        <a href="apps/fillpro/">FillPro</a>
+        <a href="about.html">About</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <section class="hero-grid" aria-label="FillPro overview">
-      <div class="surface hero-copy">
+  <main class="page">
+    <section class="page-hero">
+      <div class="surface page-hero-copy">
         <div class="page-intro">
-          <p class="eyebrow">Chrome extension for repetitive forms</p>
-          <h1>Reusable profiles for everyday web forms.</h1>
-          <p class="lead">FillPro helps you fill applications, onboarding flows, demo requests, intake forms, and other repetitive pages with saved local profiles.</p>
+          <p class="eyebrow">Indie dev · solo · since 2025</p>
+          <h1>Hi, I'm Karl. I make small browser tools that don't watch you.</h1>
+          <p class="lead">Stealthy Apps is just me, building one focused extension at a time. No tracking. No analytics. No servers I run. Everything you save stays on your device.</p>
         </div>
-
-        <div class="pill-row" aria-label="FillPro highlights">
-          <span class="pill">Private by default</span>
-          <span class="pill">Manifest V3</span>
-          <span class="pill">Smart rules</span>
-          <span class="pill">Local uploads</span>
-        </div>
-
         <div class="actions">
-          <a class="button primary" href="support.html">Open Support</a>
-          <a class="button secondary" href="privacy-policy.html">Read Privacy</a>
-          <a class="button secondary" href="changelog.html">See Release Notes</a>
+          <a class="button primary" href="apps/fillpro/">See FillPro</a>
+          <a class="button" href="about.html">About me</a>
         </div>
       </div>
 
-      <div class="hero-preview">
-        <div class="preview-shell">
-          <div class="preview-header">
-            <div class="preview-brand">
-              <img src="assets/fillpro-logo.svg" alt="" width="36" height="36" decoding="async">
-              <span>Profile preview</span>
-            </div>
-            <span class="preview-badge">Local-first</span>
-          </div>
-
-          <div class="preview-stack">
-            <div class="preview-card">
-              <div class="preview-card-head">
-                <span>Application Profile</span>
-                <span class="preview-default">Default</span>
-              </div>
-              <div class="preview-lines">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="preview-tag-row">
-                <span class="preview-tag">1 rule</span>
-                <span class="preview-tag">1 upload</span>
-                <span class="preview-tag strong">Sensitive fields skipped</span>
-              </div>
-              <div class="preview-action-row">
-                <span class="preview-action primary">Fill Page</span>
-                <span class="preview-action secondary">Edit</span>
-              </div>
-            </div>
-
-            <div class="preview-note-grid">
-              <article class="mini-note preview-card">
-                <div class="tag-row">
-                  <span class="tag">Smart rule</span>
-                </div>
-                <p><strong>/best.*contact/i</strong> can map straight to <strong>@email</strong> without extra setup.</p>
-              </article>
-              <article class="mini-note preview-card">
-                <div class="tag-row">
-                  <span class="tag strong">Upload match</span>
-                </div>
-                <p>Local files stay inside extension-managed storage and only load when you choose to fill.</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell">
-      <div class="section-heading">
-        <p class="eyebrow">Product basics</p>
-        <h2>Private profiles, practical matching, clear limits.</h2>
-        <p>FillPro stays focused on one job: saving reusable form details and applying them to normal accessible web forms when you choose to fill.</p>
-      </div>
-
-      <div class="feature-grid">
-        <article class="feature-card">
-          <h3>Private profile storage</h3>
-          <p>Profile values, smart rules, and upload matches stay local to the extension. Free use does not require an account.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Normal form coverage</h3>
-          <p>Fill Page, the on-page picker, custom fields, and smart rules are built for accessible HTML forms and common dynamic pages.</p>
-        </article>
-        <article class="feature-card">
-          <h3>Clear unsupported states</h3>
-          <p>When a page is blocked, hidden, or outside the browser surfaces FillPro can reach, the extension reports the limit clearly.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-shell compact-section">
-      <div class="section-heading">
-        <p class="eyebrow">Free and Pro</p>
-        <h2>Start small. Add more room when you need it.</h2>
-      </div>
-
-      <div class="plan-grid">
-        <article class="feature-card">
-          <h3>Free</h3>
-          <ul class="list-check">
-            <li>3 saved profiles</li>
-            <li>Fill Page and on-page picker</li>
-            <li>Smart rules and local uploads</li>
-          </ul>
-        </article>
-        <article class="feature-card">
-          <h3>Pro</h3>
-          <ul class="list-check">
-            <li>More saved profiles</li>
-            <li>Import and export profiles</li>
-            <li>Duplicate profiles for repeat workflows</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="split-layout">
-      <article class="boundary-card">
+      <article class="boundary-card mini-card">
         <div class="page-intro">
-          <p class="eyebrow">How it works</p>
-          <h2>Quick enough for daily use.</h2>
-        </div>
-        <ol class="step-list">
-          <li><strong>Step 1:</strong> Create a profile once in the popup.</li>
-          <li><strong>Step 2:</strong> Add custom fields, smart rules, or local uploads only where you need them.</li>
-          <li><strong>Step 3:</strong> Fill normal web forms from the popup, the on-page picker, or the keyboard shortcut.</li>
-        </ol>
-      </article>
-
-      <article class="boundary-card">
-        <div class="page-intro">
-          <p class="eyebrow">Known boundary</p>
-          <h2>Clear boundaries.</h2>
+          <p class="eyebrow">What you get</p>
+          <h2>Plain rules I stick to.</h2>
         </div>
         <ul class="list-check">
-          <li>FillPro does not bypass CAPTCHA, anti-bot checks, login walls, or cross-origin payment frames.</li>
-          <li>Browser-native PDF tabs are not treated like normal HTML forms.</li>
-          <li>Passwords, payment fields, SSNs, tax IDs, and one-time codes are skipped by design.</li>
+          <li>Local-only data. Profiles, rules, and uploads live in your browser.</li>
+          <li>No analytics, no telemetry, no email gate.</li>
+          <li>Narrow permissions. Only what each tool actually needs.</li>
+          <li>Free tier that's actually usable, not a teaser.</li>
         </ul>
       </article>
     </section>
 
     <section class="section-shell">
       <div class="section-heading">
-        <p class="eyebrow">Help links</p>
-        <h2>Support, privacy, and release notes stay easy to find.</h2>
-        <p>Support, privacy, and release notes are kept short and consistent so users can find the right answer quickly.</p>
+        <p class="eyebrow">Apps</p>
+        <h2>Currently shipping one tool. More coming.</h2>
+        <p>Each app is built around a single small job and stays out of the way the rest of the time.</p>
       </div>
 
       <div class="info-grid">
         <article class="info-card">
-          <h3>Support</h3>
-          <p>Setup help, troubleshooting, file-upload notes, privacy routing, and a contact flow that opens a ready email draft.</p>
-          <p class="meta"><a href="support.html">Open support</a></p>
+          <h3>FillPro <span class="release-badge">Live</span></h3>
+          <p>Private form autofill for Chrome, Edge, and Firefox. Save your profile once, fill normal web forms in one click. Skips passwords, payment fields, and one-time codes by design.</p>
+          <p class="meta"><a href="apps/fillpro/">Open FillPro page →</a></p>
         </article>
         <article class="info-card">
-          <h3>Privacy</h3>
-          <p>What FillPro stores locally, what it does not collect, where optional Pro billing touches third-party services, and how retention works.</p>
-          <p class="meta"><a href="privacy-policy.html">Open privacy policy</a></p>
+          <h3>App #2 <span class="release-badge">Coming</span></h3>
+          <p>Working on it. Same rules apply: small, private, no tracking. I'll post here when it's ready.</p>
+          <p class="meta">In progress</p>
         </article>
         <article class="info-card">
-          <h3>Changelog</h3>
-          <p>A short release log for shipped features, privacy notes, and known limits.</p>
-          <p class="meta"><a href="changelog.html">Open changelog</a></p>
+          <h3>App #3 <span class="release-badge">Coming</span></h3>
+          <p>One more in the queue. Use the contact form on any product page if you want a heads-up.</p>
+          <p class="meta">Planned</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell compact-section">
+      <div class="section-heading">
+        <p class="eyebrow">Common questions</p>
+        <h2>Quick answers.</h2>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Who built this?</h3>
+          <p>Just me — Karl. One person. No team, no investors, no roadmap deck.</p>
+        </article>
+        <article class="info-card">
+          <h3>Where does my data go?</h3>
+          <p>Nowhere. Each app stores everything on your device. I run no servers that hold user data.</p>
+        </article>
+        <article class="info-card">
+          <h3>How do you make money?</h3>
+          <p>Optional Pro upgrades on FillPro ($3.99/mo, $29.99/yr, $39.99 lifetime). Free tier covers most people. Billing is handled by Stripe via ExtensionPay — I never see your card.</p>
+        </article>
+        <article class="info-card">
+          <h3>Can I request features?</h3>
+          <p>Yes. Use the contact form on the product support page. I read every one.</p>
         </article>
       </div>
     </section>
@@ -208,8 +166,8 @@
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro by StealthyX.</span>
-      <span><a href="privacy-policy.html">Privacy</a> | <a href="changelog.html">Changelog</a> | <a href="support.html#contact">Contact</a></span>
+      <span>Stealthy Apps · built by Karl</span>
+      <span><a href="apps/fillpro/">FillPro</a> | <a href="about.html">About</a> | <a href="apps/fillpro/support.html#contact">Contact</a></span>
     </div>
   </footer>
 </body>

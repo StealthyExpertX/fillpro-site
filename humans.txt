@@ -1,0 +1,8 @@
+/* TEAM */
+Indie dev: Karl
+Brand: Stealthy Apps
+Site: https://stealthyapps.com
+
+/* SITE */
+Stack: HTML, CSS, one tiny mailto script. No analytics. No build step.
+Hosting: GitHub Pages

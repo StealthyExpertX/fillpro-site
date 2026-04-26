@@ -1,0 +1,39 @@
+# Stealthy Apps
+
+> Small, private browser tools built by an indie dev (Karl). No tracking, no analytics, no servers we run. Each app stores everything on the user's device.
+
+Stealthy Apps is a personal portfolio of focused browser extensions. The current product is FillPro. More are planned.
+
+## About
+
+- Built by: Karl, solo indie developer
+- Brand: Stealthy Apps
+- Domain: stealthyapps.com
+- Philosophy: small tools, private by default, no dark patterns, no email gates, no analytics
+
+## Products
+
+### FillPro — private form autofill for Chrome, Edge, and Firefox
+
+- What it does: fills web forms (job apps, signups, checkouts, tickets, etc.) using profiles you save locally
+- Where data lives: your browser only. Never sent to any server.
+- Skipped by design: passwords, payment fields, CVCs, SSNs, tax IDs, one-time codes
+- Free tier: 3 saved profiles, Fill Page, on-page picker, smart rules, local uploads
+- Pro tier: unlimited profiles, import/export, profile duplication. $3.99/month, $29.99/year, $39.99 lifetime. 7-day free trial.
+- Permissions: activeTab, scripting, contextMenus, storage, alarms (no host_permissions, no tabs API)
+- Supported browsers: Chrome, Microsoft Edge, Firefox, Brave, Opera, Vivaldi, Arc (any Chromium-based browser)
+- Chrome Web Store: https://chromewebstore.google.com/
+- Privacy policy: https://stealthyapps.com/apps/fillpro/privacy.html
+- Support: https://stealthyapps.com/apps/fillpro/support.html
+
+## Common questions
+
+- Is FillPro free? Yes — the free tier covers most users (3 profiles, all core fill features). Pro removes the profile cap and adds import/export.
+- Does FillPro fill passwords? No. By design. Use a password manager for that.
+- Does FillPro work on Firefox? Yes. The Chrome Web Store, Edge Add-ons, and Firefox Add-ons listings all carry the same build.
+- Does FillPro send my data anywhere? No. Profiles, rules, and uploads stay on your device.
+- Is there a trial for Pro? Yes — 7 days, no card required.
+
+## Contact
+
+- Email: via the contact form on https://stealthyapps.com/apps/fillpro/support.html#contact

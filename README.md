@@ -1,53 +1,74 @@
-# FillPro Public Site
+# Stealthy Apps — public site
 
-![FillPro logo](assets/fillpro-logo.svg)
+Source for [stealthyapps.com](https://stealthyapps.com), the public site for **Stealthy Apps** — a one-person indie studio (Karl) building small, private browser extensions.
 
-Public GitHub Pages site for FillPro.
+The site is intentionally static: plain HTML + CSS, one tiny mailto script, no framework, no analytics, no build step.
 
-This repo only contains the public-facing Pages surface used for the Chrome Web Store listing and direct support links. It stays intentionally static: plain HTML, plain CSS, one small contact script, no framework, no analytics, and no build step.
+## Structure
 
-## What this repo includes
+```
+/                  # Stealthy Apps portfolio homepage
+/about.html        # About Karl
+/apps/fillpro/     # FillPro product page
+  index.html       # product overview, features, pricing, FAQ
+  privacy.html     # FillPro privacy policy (linked from CWS listing)
+  support.html     # FillPro support + contact form
+  changelog.html   # FillPro release notes
+/assets/           # shared logo + brand assets
+/styles.css        # shared visual system
+/contact.js        # tiny mailto-based contact flow
+/sitemap.xml       # SEO
+/robots.txt        # SEO + AI crawler allowlist
+/llms.txt          # AI-crawler summary (ChatGPT, Gemini, Perplexity, Claude)
+/humans.txt        # who built this
+/CNAME             # custom domain (stealthyapps.com)
+/404.html          # not-found page
+```
 
-- `index.html` - product landing page
-- `support.html` - setup help, troubleshooting, local-data guidance, and contact form
-- `privacy-policy.html` - privacy policy and permission summary
-- `changelog.html` - public release notes
-- `styles.css` - shared visual system for the whole site
-- `contact.js` - tiny mailto-based contact flow
-- `assets/fillpro-logo.svg` - shared FillPro logo asset
+Old top-level paths (`/privacy-policy.html`, `/support.html`, `/changelog.html`) redirect to `/apps/fillpro/*` to preserve any existing inbound links.
 
-## Live pages
+## Hosting
 
-- Landing: https://stealthyexpertx.github.io/fillpro-site/
-- Support: https://stealthyexpertx.github.io/fillpro-site/support.html
-- Privacy policy: https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html
-- Changelog: https://stealthyexpertx.github.io/fillpro-site/changelog.html
+GitHub Pages, served from the `main` branch root. The `CNAME` file pins the custom domain `stealthyapps.com`.
 
-## Why this site is static
+### DNS setup (one-time, in your domain registrar)
 
-- Faster load times and fewer moving parts
-- Easier policy and privacy review
-- No extra backend or client-side tracking surface
-- Easy to audit for accuracy against the actual extension
+For an apex domain (`stealthyapps.com`), add four A records pointing to GitHub Pages:
 
-## Accuracy rules for this repo
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
 
-- Keep product claims narrow and truthful.
-- Do not imply FillPro bypasses CAPTCHA, anti-bot systems, login walls, or blocked embedded frames.
-- Keep privacy language aligned with the shipped extension behavior.
-- Remember that free-use profile data stays local to the extension on the user's device.
-- The contact form opens a local email draft. It does not submit to a server.
+For the `www` subdomain, add a CNAME pointing to `stealthyexpertx.github.io.`
 
-## Local preview
+After DNS propagates, GitHub Pages will auto-provision a Let's Encrypt cert.
 
-Open `index.html` directly in a browser for a quick check, or serve the folder with any static server if you want proper local URLs.
+### GitHub Pages settings
 
-## Deployment
+Repo → Settings → Pages:
+- Source: **Deploy from a branch**
+- Branch: `main` / `/` (root)
+- Custom domain: `stealthyapps.com`
+- Enforce HTTPS: ✅
 
-The included GitHub Actions workflow publishes the repository root to GitHub Pages.
+## SEO + AI search
 
-## Maintenance notes
+- Schema.org JSON-LD on every page (`Person`, `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage`, `BreadcrumbList`, `PrivacyPolicy`).
+- Open Graph + Twitter cards on every page.
+- Canonical URLs on every page.
+- `sitemap.xml`, `robots.txt`, and `llms.txt` for traditional + AI crawlers (GPTBot, Google-Extended, PerplexityBot, ClaudeBot, anthropic-ai, CCBot).
+- Question-format H2s on FAQ sections (LLMs prefer those).
 
-- Keep relative links for internal navigation.
-- Keep the shared branding, palette, and copy consistent across all pages.
-- If the extension behavior changes, update the privacy, support, and changelog pages in the same pass.
+## Privacy posture (whole site)
+
+- No analytics, no Google Tag Manager, no Meta Pixel.
+- No third-party fonts (uses system UI stack).
+- Strict CSP on the FillPro pages.
+- `referrer: no-referrer` on every page.
+
+## License
+
+The site source in this repo is © Stealthy Apps. Content is not open source. Inspecting and learning from the markup is fine.
