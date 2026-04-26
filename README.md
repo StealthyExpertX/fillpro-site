@@ -14,21 +14,21 @@ This repository is intentionally small. It hosts the Chrome Web Store-facing leg
 
 Open `index.html` directly in a browser, or serve the folder with any static server.
 
+## Live Site
+
+- Site: `https://stealthyexpertx.github.io/fillpro-site/`
+- Privacy policy: `https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html`
+- Support: `https://stealthyexpertx.github.io/fillpro-site/support.html`
+
 ## GitHub Pages
 
 The included workflow deploys the static site from the repository root using GitHub Pages Actions.
 
-From this folder, publish with:
+If the repository ever needs to be recreated, publish from this folder with:
 
 ```powershell
 gh auth login
-gh repo create StealthyExpertX/fillpro-site --public --source . --push
+gh repo create StealthyExpertX/fillpro-site --public --source . --remote origin --push
 ```
 
-After the first push, GitHub Pages should deploy from the included workflow. If Pages is not enabled automatically, open the repository settings and set Pages to GitHub Actions.
-
-Expected production URLs after publishing under `StealthyExpertX/fillpro-site`:
-
-- `https://stealthyexpertx.github.io/fillpro-site/`
-- `https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html`
-- `https://stealthyexpertx.github.io/fillpro-site/support.html`
+Pages should be configured for GitHub Actions.
