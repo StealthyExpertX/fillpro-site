@@ -104,11 +104,25 @@
       </article>
 
       <article class="support-card">
+        <p class="eyebrow">Expectation check</p>
+        <h3>What FillPro is not trying to be.</h3>
+        <ul class="list-check">
+          <li>Not a password manager, payment autofill tool, or sensitive-data vault.</li>
+          <li>Not random fake-data generation. QA testers can create dedicated test profiles instead.</li>
+          <li>Not automatic page-load filling. You stay in control with Fill Page, the picker, or Ctrl+Shift+F.</li>
+          <li>Not cloud sync. Profiles stay local; Pro import/export can move profiles manually.</li>
+          <li>Not guaranteed to control custom dropdowns or date pickers when a site hides the real field.</li>
+        </ul>
+      </article>
+
+      <article class="support-card">
         <p class="eyebrow">Troubleshooting</p>
         <h3>When a form is close but not quite there.</h3>
         <ul class="list-check">
           <li>If nothing fills, wait until the real form is visible, then try again.</li>
           <li>If the wrong field was matched, add a smart rule for that site-specific label.</li>
+          <li>If a multi-step form changes after the first step, fill again after the next step appears.</li>
+          <li>If a custom dropdown or date picker does not fill, select it manually and report the site so it can be reviewed.</li>
           <li>If an upload field is missed, make the file pattern more explicit.</li>
           <li>If the page is dynamic, try the on-page picker after the form fully appears.</li>
         </ul>
