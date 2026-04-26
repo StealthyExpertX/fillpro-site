@@ -401,6 +401,8 @@ main {
   inset: -1px;
   border-radius: inherit;
   background:
+    radial-gradient(560px circle at var(--spot-x) var(--spot-y), rgba(157, 231, 215, var(--spot-alpha)), transparent 44%),
+    radial-gradient(460px circle at var(--spot-x) var(--spot-y), rgba(117, 216, 255, 0.08), transparent 52%),
     radial-gradient(circle at top right, rgba(117, 216, 255, 0.13), transparent 28%),
     radial-gradient(circle at bottom left, rgba(157, 231, 215, 0.12), transparent 32%);
   pointer-events: none;

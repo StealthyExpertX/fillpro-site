@@ -126,9 +126,95 @@
       return;
     }
 
-    var cards = document.querySelectorAll(
-      '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card',
-    );
+    var cardSelector = '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card';
+    var cards = document.querySelectorAll(cardSelector);
+    var activeCard = null;
+    var globalFrame = 0;
+    var globalEvent = null;
+
+    function setCardSpot(card, event) {
+      var rect = card.getBoundingClientRect();
+      var nextX = ((event.clientX - rect.left) / rect.width) * 100;
+      var nextY = ((event.clientY - rect.top) / rect.height) * 100;
+
+      card.style.setProperty('--spot-alpha', '0.16');
+      card.style.setProperty('--spot-x', nextX.toFixed(2) + '%');
+      card.style.setProperty('--spot-y', nextY.toFixed(2) + '%');
+    }
+
+    function resetCardSpot(card) {
+      card.style.setProperty('--spot-alpha', '0.035');
+      card.style.setProperty('--spot-x', '50%');
+      card.style.setProperty('--spot-y', '50%');
+    }
+
+    function renderGlobalSpot() {
+      var event = globalEvent;
+      var target = event && event.target && event.target.closest ? event.target.closest(cardSelector) : null;
+
+      globalFrame = 0;
+
+      if (!target) {
+        if (activeCard) {
+          resetCardSpot(activeCard);
+          activeCard = null;
+        }
+
+        return;
+      }
+
+      if (activeCard && activeCard !== target) {
+        resetCardSpot(activeCard);
+      }
+
+      activeCard = target;
+      setCardSpot(target, event);
+    }
+
+    function queueGlobalSpot(event) {
+      globalEvent = event;
+
+      if (globalFrame) {
+        return;
+      }
+
+      globalFrame = window.requestAnimationFrame(renderGlobalSpot);
+    }
+
+    document.addEventListener('pointermove', queueGlobalSpot, { passive: true });
+    document.addEventListener('mousemove', queueGlobalSpot, { passive: true });
+    document.addEventListener('mouseleave', function () {
+      if (activeCard) {
+        resetCardSpot(activeCard);
+        activeCard = null;
+      }
+    });
+
+    document.querySelectorAll('.page-hero-copy, .hero-copy').forEach(function (heroCard) {
+      heroCard.addEventListener('mousemove', function (event) {
+        setCardSpot(heroCard, event);
+      }, { passive: true });
+
+      heroCard.addEventListener('pointermove', function (event) {
+        setCardSpot(heroCard, event);
+      }, { passive: true });
+
+      heroCard.addEventListener('mouseenter', function () {
+        heroCard.style.setProperty('--spot-alpha', '0.16');
+      });
+
+      heroCard.addEventListener('pointerenter', function () {
+        heroCard.style.setProperty('--spot-alpha', '0.16');
+      });
+
+      heroCard.addEventListener('mouseleave', function () {
+        resetCardSpot(heroCard);
+      });
+
+      heroCard.addEventListener('pointerleave', function () {
+        resetCardSpot(heroCard);
+      });
+    });
 
     cards.forEach(function (card) {
       var frame = 0;
@@ -152,26 +238,40 @@
         frame = window.requestAnimationFrame(render);
       }
 
-      card.addEventListener('pointerenter', function () {
+      function handleEnter() {
         card.style.setProperty('--spot-alpha', '0.16');
-      });
+      }
+
+      function handleMove(event) {
+        var rect = card.getBoundingClientRect();
+        var nextX = ((event.clientX - rect.left) / rect.width) * 100;
+        var nextY = ((event.clientY - rect.top) / rect.height) * 100;
+
+        queueRender(nextX, nextY);
+      }
+
+      function handleLeave() {
+        card.style.setProperty('--spot-alpha', '0.035');
+        queueRender(50, 50);
+      }
+
+      card.addEventListener('pointerenter', handleEnter);
+      card.addEventListener('mouseenter', handleEnter);
 
       card.addEventListener(
         'pointermove',
-        function (event) {
-          var rect = card.getBoundingClientRect();
-          var nextX = ((event.clientX - rect.left) / rect.width) * 100;
-          var nextY = ((event.clientY - rect.top) / rect.height) * 100;
-
-          queueRender(nextX, nextY);
-        },
+        handleMove,
         { passive: true },
       );
 
-      card.addEventListener('pointerleave', function () {
-        card.style.setProperty('--spot-alpha', '0.035');
-        queueRender(50, 50);
-      });
+      card.addEventListener(
+        'mousemove',
+        handleMove,
+        { passive: true },
+      );
+
+      card.addEventListener('pointerleave', handleLeave);
+      card.addEventListener('mouseleave', handleLeave);
     });
   }
 
