@@ -4,95 +4,197 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FillPro Support</title>
-  <meta name="description" content="Support, troubleshooting, privacy contact, and known limits for the FillPro Chrome extension.">
+  <meta name="description" content="Support, troubleshooting, local data guidance, and privacy contact for the FillPro Chrome extension.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
+  <meta name="theme-color" content="#0b1a23">
+  <link rel="icon" href="assets/fillpro-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="index.html"><span class="brand-mark">F</span><span>FillPro</span></a>
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/fillpro-logo.svg" alt="FillPro logo" width="48" height="48" decoding="async">
+        <span class="brand-lockup">
+          <span class="brand-title">FillPro</span>
+          <span class="brand-subtitle">Private form autofill</span>
+        </span>
+      </a>
       <div class="nav-links">
-        <a href="support.html">Support</a>
+        <a href="support.html" aria-current="page">Support</a>
         <a href="changelog.html">Changelog</a>
         <a href="privacy-policy.html">Privacy</a>
-        <a href="mailto:support@stealthyapps.com">Email Support</a>
+        <a href="support.html#contact">Contact</a>
       </div>
     </nav>
   </header>
 
   <main class="page">
-    <p class="eyebrow">Support</p>
-    <h1>FillPro Support</h1>
-    <p class="lead">Help for profile setup, on-page filling, smart rules, local file uploads, privacy questions, and known site limitations.</p>
+    <section class="page-hero">
+      <div class="surface page-hero-copy">
+        <div class="page-intro">
+          <p class="eyebrow">Support</p>
+          <h1>FillPro Support</h1>
+          <p class="lead">Setup help, upload notes, known limits, billing questions, and privacy contact in one place.</p>
+        </div>
+        <div class="quick-links" aria-label="Jump to sections">
+          <a class="quick-link" href="#start">Fast start</a>
+          <a class="quick-link" href="#uploads">Uploads</a>
+          <a class="quick-link" href="#limits">Known limits</a>
+          <a class="quick-link" href="#contact">Contact</a>
+        </div>
+      </div>
 
-    <h2>Fast Start</h2>
-    <ol>
-      <li>Create a profile in the FillPro popup.</li>
-      <li>Add custom fields, smart rules, or local uploads if needed.</li>
-      <li>Open a normal web form and click Fill Page, use the on-page picker, or press Ctrl+Shift+F.</li>
-    </ol>
+      <article class="boundary-card mini-card">
+        <div class="page-intro">
+          <p class="eyebrow">Local data note</p>
+          <h2>Local data is self-managed.</h2>
+        </div>
+        <p>FillPro stores free-use profile data on your device. Support cannot remotely inspect, export, or delete that local data.</p>
+        <ul class="list-check">
+          <li>Delete profiles directly in FillPro.</li>
+          <li>Uninstall the extension to remove extension-managed storage.</li>
+          <li>Delete exported files separately if you saved them outside the extension.</li>
+        </ul>
+      </article>
+    </section>
 
-    <h2>Best Use Cases</h2>
-    <ul>
-      <li>Job applications and candidate forms</li>
-      <li>Account creation and onboarding flows</li>
-      <li>Checkout contact and shipping sections</li>
-      <li>Lead capture, demo request, and contact forms</li>
-      <li>Vendor, partner, and client intake forms</li>
-    </ul>
+    <section class="support-grid">
+      <article class="support-card" id="start">
+        <p class="eyebrow">Fast start</p>
+        <h3>Get to the first real fill quickly.</h3>
+        <ol class="step-list">
+          <li><strong>Step 1:</strong> Create a profile in the FillPro popup.</li>
+          <li><strong>Step 2:</strong> Add custom fields, smart rules, or local uploads only if you need them.</li>
+          <li><strong>Step 3:</strong> Open a normal web form and use Fill Page, the on-page picker, or Ctrl+Shift+F.</li>
+        </ol>
+      </article>
 
-    <h2>Privacy Promise</h2>
-    <ul>
-      <li>Profile data stays in your browser.</li>
-      <li>No account is required for free use.</li>
-      <li>No analytics or background form-data collection.</li>
-      <li>Passwords, payment fields, SSNs, tax IDs, and one-time codes are skipped by design.</li>
-    </ul>
+      <article class="support-card">
+        <p class="eyebrow">Smart rules</p>
+        <h3>Use them for awkward labels.</h3>
+        <ul class="list-check">
+          <li>Plain text does a contains match, for example work email.</li>
+          <li>Regex handles harder cases, for example /best.*contact/i.</li>
+          <li>@field references reuse saved values such as @email or @company_size.</li>
+        </ul>
+      </article>
 
-    <h2>Using Smart Rules</h2>
-    <p>Smart rules help when a site uses awkward field names or labels that do not match normal profile keys.</p>
-    <ul>
-      <li>Use plain text for contains matching, for example work email.</li>
-      <li>Use JavaScript regex literal syntax for harder cases, like /best.*contact/i.</li>
-      <li>Use @field references to reuse existing profile values, like @email or @company_size.</li>
-    </ul>
+      <article class="support-card" id="uploads">
+        <p class="eyebrow">Local uploads</p>
+        <h3>No fixed FillPro file-size cap.</h3>
+        <ul class="list-check">
+          <li>Supported formats: PDF, DOC, DOCX, TXT, RTF, ODT, and Pages.</li>
+          <li>FillPro does not set a fixed per-file upload limit.</li>
+          <li>Practical browser, device, and destination-site limits still apply.</li>
+          <li>Use clear target patterns like resume, cv, candidate resume, or /cover.?letter/i.</li>
+        </ul>
+      </article>
 
-    <h2>Using Local Uploads</h2>
-    <p>Attach a resume, CV, cover letter, or similar file inside a profile. FillPro stores a local encoded copy in extension storage and uses it only when you choose to fill a matching upload field.</p>
-    <ul>
-      <li>Supported formats: PDF, DOC, DOCX, TXT, RTF, ODT, and Pages</li>
-      <li>Current per-file limit: 2 MB</li>
-      <li>Use a target pattern like resume, cv, or /cover.?letter/i.</li>
-    </ul>
+      <article class="support-card" id="limits">
+        <p class="eyebrow">Known limits</p>
+        <h3>Known browser and site limits.</h3>
+        <ul class="list-check">
+          <li>Sites behind CAPTCHA, bot checks, or human verification must be cleared manually first.</li>
+          <li>Cross-origin embedded forms can stay unreachable under Chrome's privacy-first activeTab model.</li>
+          <li>Browser-native PDF tabs are not fillable like normal HTML forms.</li>
+          <li>Payment cards, CVC, passwords, SSNs, tax IDs, and one-time codes are skipped by design.</li>
+        </ul>
+      </article>
 
-    <h2>Known Limits</h2>
-    <ul>
-      <li>Sites behind CAPTCHA, bot checks, or human verification must be cleared manually first.</li>
-      <li>Cross-origin embedded forms can remain unreachable under Chrome's privacy-first activeTab model.</li>
-      <li>Browser-native PDF tabs are not fillable. Compatible PDF.js-based HTML viewers are the supported path.</li>
-      <li>Payment cards, CVC, passwords, SSNs, tax IDs, and one-time codes are intentionally skipped.</li>
-      <li>Some sites intentionally block automation. In those cases, FillPro should report the blocker honestly instead of faking success.</li>
-    </ul>
+      <article class="support-card">
+        <p class="eyebrow">Troubleshooting</p>
+        <h3>When a form is close but not quite there.</h3>
+        <ul class="list-check">
+          <li>If nothing fills, wait until the real form is visible, then try again.</li>
+          <li>If the wrong field was matched, add a smart rule for that site-specific label.</li>
+          <li>If an upload field is missed, make the file pattern more explicit.</li>
+          <li>If the page is dynamic, try the on-page picker after the form fully appears.</li>
+        </ul>
+      </article>
 
-    <h2>Troubleshooting</h2>
-    <ul>
-      <li>If nothing fills, wait until the real form is visible, then try again.</li>
-      <li>If the wrong field was matched, add a smart rule for that site-specific label.</li>
-      <li>If an upload field is missed, add a more explicit file-target pattern like candidate resume or /curriculum/i.</li>
-      <li>If a page is dynamic, try the on-page picker after the form has fully appeared.</li>
-    </ul>
+      <article class="support-card">
+        <p class="eyebrow">Use cases</p>
+        <h3>Where FillPro fits best.</h3>
+        <ul class="list-check">
+          <li>Job applications and candidate forms</li>
+          <li>Account creation and onboarding flows</li>
+          <li>Lead capture, demo request, and intake forms</li>
+          <li>Checkout contact and shipping sections</li>
+        </ul>
+      </article>
 
-    <h2>Contact</h2>
-    <p>Product support: <a href="mailto:support@stealthyapps.com">support@stealthyapps.com</a></p>
-    <p>Privacy requests: <a href="mailto:privacy@stealthyapps.com">privacy@stealthyapps.com</a></p>
-    <p>For privacy details, see the <a href="privacy-policy.html">FillPro Privacy Policy</a>.</p>
+      <article class="support-card">
+        <p class="eyebrow">Billing / Pro</p>
+        <h3>What changes when you upgrade.</h3>
+        <ul class="list-check">
+          <li>Free mode includes 3 saved profiles.</li>
+          <li>Pro adds more saved profiles, import/export, and duplication.</li>
+          <li>Payments are handled by ExtensionPay and Stripe.</li>
+          <li>Free-use profile data still stays local on your device.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="contact-card" id="contact">
+      <div class="page-intro">
+        <p class="eyebrow">Contact</p>
+        <h2>Choose a topic and open a draft.</h2>
+        <p>If you need help, use this form. It opens your email app with the right inbox and a clean draft.</p>
+      </div>
+
+      <form class="contact-form" data-contact-form novalidate>
+        <fieldset class="field-row contact-fieldset">
+          <legend>Contact details</legend>
+          <div class="field">
+            <label for="contactName">Name</label>
+            <input id="contactName" name="contactName" type="text" autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="contactReply">Reply email</label>
+            <input id="contactReply" name="contactReply" type="email" autocomplete="email" placeholder="you@example.com">
+          </div>
+        </fieldset>
+
+        <fieldset class="field-row contact-fieldset">
+          <legend>Topic and reason</legend>
+          <div class="field">
+            <label for="contactTopic">Topic</label>
+            <select id="contactTopic" name="contactTopic" required>
+              <option value="support">Support</option>
+              <option value="billing">Billing / Pro</option>
+              <option value="privacy">Privacy</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="contactReason">Reason</label>
+            <select id="contactReason" name="contactReason" required></select>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="contactMessage" placeholder="What happened, what you expected, and what you need next." required></textarea>
+        </div>
+
+        <div class="contact-meta">
+          <p class="helper" data-recipient-note></p>
+          <button class="button primary" type="submit">Open Email Draft</button>
+        </div>
+        <p class="small" data-contact-status aria-live="polite">This opens your default email app with a prefilled draft. Nothing is sent directly from this site.</p>
+      </form>
+
+      <p class="small">Use the Privacy topic for policy questions, local-data guidance, and purchase-related privacy issues. For full policy details, see the <a href="privacy-policy.html">FillPro Privacy Policy</a>.</p>
+    </section>
   </main>
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro Support</span>
-      <span><a href="privacy-policy.html">Privacy Policy</a> | <a href="changelog.html">Changelog</a></span>
+      <span>FillPro by StealthyX.</span>
+      <span><a href="privacy-policy.html">Privacy Policy</a> | <a href="changelog.html">Changelog</a> | <a href="#contact">Contact</a></span>
     </div>
   </footer>
+  <script src="contact.js"></script>
 </body>
 </html>

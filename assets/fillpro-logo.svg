@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="FillPro logo">
+  <defs>
+    <linearGradient id="base" x1="156" y1="104" x2="868" y2="928" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f766e" />
+      <stop offset="0.54" stop-color="#155e75" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="sheet" x1="310" y1="214" x2="720" y2="844" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="1" stop-color="#dff7f3" />
+    </linearGradient>
+    <filter id="shadow" x="160" y="142" width="704" height="780" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="34" stdDeviation="36" flood-color="#020617" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="210" fill="url(#base)" />
+  <path d="M126 712C250 796 394 842 546 842c134 0 258-36 364-99v108c0 33-26 59-59 59H173c-33 0-59-26-59-59V720c4-3 8-6 12-8Z" fill="#052e34" opacity="0.34" />
+
+  <g filter="url(#shadow)">
+    <rect x="258" y="176" width="508" height="668" rx="82" fill="url(#sheet)" />
+    <rect x="318" y="276" width="388" height="68" rx="34" fill="#0f766e" />
+    <rect x="318" y="404" width="306" height="48" rx="24" fill="#94a3b8" opacity="0.62" />
+    <rect x="318" y="500" width="388" height="48" rx="24" fill="#94a3b8" opacity="0.5" />
+    <rect x="318" y="596" width="228" height="48" rx="24" fill="#94a3b8" opacity="0.45" />
+  </g>
+
+  <circle cx="682" cy="686" r="150" fill="#f8fafc" />
+  <circle cx="682" cy="686" r="126" fill="#16a34a" />
+  <path d="M610 684l48 48 100-118" fill="none" stroke="#f8fafc" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

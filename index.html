@@ -3,72 +3,204 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FillPro - Private Web Form Autofill</title>
-  <meta name="description" content="FillPro is a Chrome extension for private local web-form autofill with profiles, smart rules, page picker, and local upload matching.">
+  <title>FillPro | Private Form Autofill</title>
+  <meta name="description" content="FillPro is a private Chrome extension for reusable form profiles, smart field matching, local upload matching, and clear support documentation.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
+  <meta name="theme-color" content="#0b1a23">
+  <link rel="icon" href="assets/fillpro-logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="index.html"><span class="brand-mark">F</span><span>FillPro</span></a>
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/fillpro-logo.svg" alt="FillPro logo" width="48" height="48" decoding="async">
+        <span class="brand-lockup">
+          <span class="brand-title">FillPro</span>
+          <span class="brand-subtitle">Private form autofill</span>
+        </span>
+      </a>
       <div class="nav-links">
         <a href="support.html">Support</a>
         <a href="changelog.html">Changelog</a>
         <a href="privacy-policy.html">Privacy</a>
-        <a href="mailto:support@stealthyapps.com">Contact</a>
+        <a href="support.html#contact">Contact</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <p class="eyebrow">Chrome extension support site</p>
-      <h1>Private autofill for real web forms.</h1>
-      <p class="lead">FillPro helps you reuse local profiles on applications, registrations, onboarding flows, vendor forms, checkout contact and shipping sections, and other repetitive web forms.</p>
-      <div class="actions">
-        <a class="button primary" href="privacy-policy.html">Read Privacy Policy</a>
-        <a class="button" href="support.html">Get Support</a>
-        <a class="button" href="changelog.html">View Changelog</a>
+    <section class="hero-grid" aria-label="FillPro overview">
+      <div class="surface hero-copy">
+        <div class="page-intro">
+          <p class="eyebrow">Chrome extension for repetitive forms</p>
+          <h1>Reusable profiles for everyday web forms.</h1>
+          <p class="lead">FillPro helps you fill applications, onboarding flows, demo requests, intake forms, and other repetitive pages with saved local profiles.</p>
+        </div>
+
+        <div class="pill-row" aria-label="FillPro highlights">
+          <span class="pill">Private by default</span>
+          <span class="pill">Manifest V3</span>
+          <span class="pill">Smart rules</span>
+          <span class="pill">Local uploads</span>
+        </div>
+
+        <div class="actions">
+          <a class="button primary" href="support.html">Open Support</a>
+          <a class="button secondary" href="privacy-policy.html">Read Privacy</a>
+          <a class="button secondary" href="changelog.html">See Release Notes</a>
+        </div>
+      </div>
+
+      <div class="hero-preview">
+        <div class="preview-shell">
+          <div class="preview-header">
+            <div class="preview-brand">
+              <img src="assets/fillpro-logo.svg" alt="" width="36" height="36" decoding="async">
+              <span>Profile preview</span>
+            </div>
+            <span class="preview-badge">Local-first</span>
+          </div>
+
+          <div class="preview-stack">
+            <div class="preview-card">
+              <div class="preview-card-head">
+                <span>Application Profile</span>
+                <span class="preview-default">Default</span>
+              </div>
+              <div class="preview-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="preview-tag-row">
+                <span class="preview-tag">1 rule</span>
+                <span class="preview-tag">1 upload</span>
+                <span class="preview-tag strong">Sensitive fields skipped</span>
+              </div>
+              <div class="preview-action-row">
+                <span class="preview-action primary">Fill Page</span>
+                <span class="preview-action secondary">Edit</span>
+              </div>
+            </div>
+
+            <div class="preview-note-grid">
+              <article class="mini-note preview-card">
+                <div class="tag-row">
+                  <span class="tag">Smart rule</span>
+                </div>
+                <p><strong>/best.*contact/i</strong> can map straight to <strong>@email</strong> without extra setup.</p>
+              </article>
+              <article class="mini-note preview-card">
+                <div class="tag-row">
+                  <span class="tag strong">Upload match</span>
+                </div>
+                <p>Local files stay inside extension-managed storage and only load when you choose to fill.</p>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid" aria-label="FillPro highlights">
-      <article class="card">
-        <h3>Local-first profiles</h3>
-        <p>Profile data is saved in Chrome extension storage on your device. Free use does not require an account.</p>
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">Product basics</p>
+        <h2>Private profiles, practical matching, clear limits.</h2>
+        <p>FillPro stays focused on one job: saving reusable form details and applying them to normal accessible web forms when you choose to fill.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Private profile storage</h3>
+          <p>Profile values, smart rules, and upload matches stay local to the extension. Free use does not require an account.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Normal form coverage</h3>
+          <p>Fill Page, the on-page picker, custom fields, and smart rules are built for accessible HTML forms and common dynamic pages.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Clear unsupported states</h3>
+          <p>When a page is blocked, hidden, or outside the browser surfaces FillPro can reach, the extension reports the limit clearly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell compact-section">
+      <div class="section-heading">
+        <p class="eyebrow">Free and Pro</p>
+        <h2>Start small. Add more room when you need it.</h2>
+      </div>
+
+      <div class="plan-grid">
+        <article class="feature-card">
+          <h3>Free</h3>
+          <ul class="list-check">
+            <li>3 saved profiles</li>
+            <li>Fill Page and on-page picker</li>
+            <li>Smart rules and local uploads</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>Pro</h3>
+          <ul class="list-check">
+            <li>More saved profiles</li>
+            <li>Import and export profiles</li>
+            <li>Duplicate profiles for repeat workflows</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="split-layout">
+      <article class="boundary-card">
+        <div class="page-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>Quick enough for daily use.</h2>
+        </div>
+        <ol class="step-list">
+          <li><strong>Step 1:</strong> Create a profile once in the popup.</li>
+          <li><strong>Step 2:</strong> Add custom fields, smart rules, or local uploads only where you need them.</li>
+          <li><strong>Step 3:</strong> Fill normal web forms from the popup, the on-page picker, or the keyboard shortcut.</li>
+        </ol>
       </article>
-      <article class="card">
-        <h3>Broad form coverage</h3>
-        <p>Use one-click fill, the on-page picker, smart rules, custom fields, and local upload matching for normal accessible web forms.</p>
-      </article>
-      <article class="card">
-        <h3>Sensitive fields skipped</h3>
-        <p>Passwords, payment cards, SSNs, tax IDs, one-time codes, and similar sensitive fields are intentionally skipped.</p>
+
+      <article class="boundary-card">
+        <div class="page-intro">
+          <p class="eyebrow">Known boundary</p>
+          <h2>Clear boundaries.</h2>
+        </div>
+        <ul class="list-check">
+          <li>FillPro does not bypass CAPTCHA, anti-bot checks, login walls, or cross-origin payment frames.</li>
+          <li>Browser-native PDF tabs are not treated like normal HTML forms.</li>
+          <li>Passwords, payment fields, SSNs, tax IDs, and one-time codes are skipped by design.</li>
+        </ul>
       </article>
     </section>
 
-    <section class="notice">
-      <h2>Known boundary</h2>
-      <p>FillPro does not bypass CAPTCHA, anti-bot checks, login walls, native browser PDF viewers, cross-origin payment frames, or site restrictions. If a site blocks access before a normal form is available, FillPro reports that honestly.</p>
-    </section>
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">Help links</p>
+        <h2>Support, privacy, and release notes stay easy to find.</h2>
+        <p>Support, privacy, and release notes are kept short and consistent so users can find the right answer quickly.</p>
+      </div>
 
-    <section>
-      <h2>Project Notes</h2>
-      <div class="grid" aria-label="Project notes">
-        <article class="card">
-          <h3>Initial release notes</h3>
-          <p>See what shipped in the first public FillPro release, including privacy-first autofill, smart rules, upload matching, and blocker honesty.</p>
-          <p><a href="changelog.html">Open changelog</a></p>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Support</h3>
+          <p>Setup help, troubleshooting, file-upload notes, privacy routing, and a contact flow that opens a ready email draft.</p>
+          <p class="meta"><a href="support.html">Open support</a></p>
         </article>
-        <article class="card">
-          <h3>Support and contact</h3>
-          <p>Get setup help, troubleshooting guidance, privacy details, and direct contact links without hunting through the extension UI.</p>
-          <p><a href="support.html">Open support</a></p>
+        <article class="info-card">
+          <h3>Privacy</h3>
+          <p>What FillPro stores locally, what it does not collect, where optional Pro billing touches third-party services, and how retention works.</p>
+          <p class="meta"><a href="privacy-policy.html">Open privacy policy</a></p>
         </article>
-        <article class="card">
-          <h3>Privacy and trust</h3>
-          <p>Review what FillPro stores locally, what it skips on purpose, and how optional Pro licensing data is handled.</p>
-          <p><a href="privacy-policy.html">Open privacy policy</a></p>
+        <article class="info-card">
+          <h3>Changelog</h3>
+          <p>A short release log for shipped features, privacy notes, and known limits.</p>
+          <p class="meta"><a href="changelog.html">Open changelog</a></p>
         </article>
       </div>
     </section>
@@ -76,8 +208,8 @@
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro is operated by Karl Davis at StealthyApps.</span>
-      <span><a href="privacy-policy.html">Privacy</a> | <a href="changelog.html">Changelog</a></span>
+      <span>FillPro by StealthyX.</span>
+      <span><a href="privacy-policy.html">Privacy</a> | <a href="changelog.html">Changelog</a> | <a href="support.html#contact">Contact</a></span>
     </div>
   </footer>
 </body>

@@ -1,36 +1,53 @@
 # FillPro Public Site
 
-Public support and privacy pages for FillPro, a Chrome extension for private local web-form autofill.
+![FillPro logo](assets/fillpro-logo.svg)
 
-This repository is intentionally small. It hosts the Chrome Web Store-facing legal and support pages without publishing the private extension workspace, launch research, test artifacts, or internal strategy notes.
+Public GitHub Pages site for FillPro.
 
-## Pages
+This repo only contains the public-facing Pages surface used for the Chrome Web Store listing and direct support links. It stays intentionally static: plain HTML, plain CSS, one small contact script, no framework, no analytics, and no build step.
 
-- `index.html` - public product/support landing page
-- `privacy-policy.html` - Chrome Web Store privacy policy URL
-- `support.html` - support, known limits, troubleshooting, and contact
-- `changelog.html` - public release notes page
+## What this repo includes
 
-## Local Preview
+- `index.html` - product landing page
+- `support.html` - setup help, troubleshooting, local-data guidance, and contact form
+- `privacy-policy.html` - privacy policy and permission summary
+- `changelog.html` - public release notes
+- `styles.css` - shared visual system for the whole site
+- `contact.js` - tiny mailto-based contact flow
+- `assets/fillpro-logo.svg` - shared FillPro logo asset
 
-Open `index.html` directly in a browser, or serve the folder with any static server.
+## Live pages
 
-## Live Site
+- Landing: https://stealthyexpertx.github.io/fillpro-site/
+- Support: https://stealthyexpertx.github.io/fillpro-site/support.html
+- Privacy policy: https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html
+- Changelog: https://stealthyexpertx.github.io/fillpro-site/changelog.html
 
-- Site: `https://stealthyexpertx.github.io/fillpro-site/`
-- Privacy policy: `https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html`
-- Support: `https://stealthyexpertx.github.io/fillpro-site/support.html`
-- Changelog: `https://stealthyexpertx.github.io/fillpro-site/changelog.html`
+## Why this site is static
 
-## GitHub Pages
+- Faster load times and fewer moving parts
+- Easier policy and privacy review
+- No extra backend or client-side tracking surface
+- Easy to audit for accuracy against the actual extension
 
-The included workflow deploys the static site from the repository root using GitHub Pages Actions.
+## Accuracy rules for this repo
 
-If the repository ever needs to be recreated, publish from this folder with:
+- Keep product claims narrow and truthful.
+- Do not imply FillPro bypasses CAPTCHA, anti-bot systems, login walls, or blocked embedded frames.
+- Keep privacy language aligned with the shipped extension behavior.
+- Remember that free-use profile data stays local to the extension on the user's device.
+- The contact form opens a local email draft. It does not submit to a server.
 
-```powershell
-gh auth login
-gh repo create StealthyExpertX/fillpro-site --public --source . --remote origin --push
-```
+## Local preview
 
-Pages should be configured for GitHub Actions.
+Open `index.html` directly in a browser for a quick check, or serve the folder with any static server if you want proper local URLs.
+
+## Deployment
+
+The included GitHub Actions workflow publishes the repository root to GitHub Pages.
+
+## Maintenance notes
+
+- Keep relative links for internal navigation.
+- Keep the shared branding, palette, and copy consistent across all pages.
+- If the extension behavior changes, update the privacy, support, and changelog pages in the same pass.
