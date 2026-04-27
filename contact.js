@@ -43,7 +43,7 @@ const CONTACT_CONTEXTS = {
     requireName: false,
     requireReplyEmail: false,
     idleMessage:
-      'Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.',
+      'Choose how you want to send this. Send Directly stays on this page. Use Email App opens your mail app or webmail.',
     topics: {
       support: {
         label: 'Support',
@@ -91,7 +91,7 @@ const CONTACT_CONTEXTS = {
     requireName: true,
     requireReplyEmail: true,
     idleMessage:
-      'Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.',
+      'Choose how you want to send this. Send Directly stays on this page. Use Email App opens your mail app or webmail.',
     topics: {
       general: {
         label: 'General',
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus(
           statusNode,
           'error',
-          'Copy failed here. Use the Gmail, Outlook, Yahoo, or default mail app buttons instead.',
+          'Copy failed here. Use Gmail, Outlook, Yahoo, or the default mail app buttons instead.',
         );
       }
     });
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'error',
         requestedAction === 'direct'
           ? 'Add your name before sending directly.'
-          : 'Add your name before choosing an email app.',
+          : 'Add your name before using an email app.',
       );
       nameField.focus();
       return;
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'error',
         requestedAction === 'direct'
           ? 'Add your email before sending directly so I can reply.'
-          : 'Add your email before choosing an email app.',
+          : 'Add your email before using an email app.',
       );
       replyField.focus();
       return;
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'error',
         requestedAction === 'direct'
           ? 'Use a valid email address before sending directly.'
-          : 'Use a valid email address before choosing an email app.',
+          : 'Use a valid email address before using an email app.',
       );
       replyField.focus();
       return;
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'error',
         requestedAction === 'direct'
           ? 'Pick a topic, pick a reason, and write a short message before sending directly.'
-          : 'Pick a topic, pick a reason, and write a short message before choosing an email app.',
+          : 'Pick a topic, pick a reason, and write a short message before using an email app.',
       );
       return;
     }
@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Direct send is not supported in this browser. Use Choose Email App instead.',
+        'Direct send is not supported in this browser. Use Email App instead.',
       );
       return;
     }
@@ -568,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        `${error.message} If you need to keep moving, use Choose Email App below instead.`,
+        `${error.message} If you need to keep moving, use Email App below instead.`,
       );
     } finally {
       setActionState(false);
