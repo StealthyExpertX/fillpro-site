@@ -74,10 +74,11 @@ const CONTACT_CONTEXTS = {
         label: 'Privacy',
         recipient: 'privacy',
         inboxLabel: 'FillPro privacy inbox',
-        routeNote: 'This goes straight to my privacy inbox.',
+        routeNote:
+          'This goes straight to my privacy inbox. I can explain what stays local and how to clear it, but I cannot delete FillPro data remotely.',
         reasons: [
           ['data_question', 'Question about what stays local'],
-          ['local_clear', 'How do I clear local data?'],
+          ['local_clear', 'How do I remove local FillPro data?'],
           ['policy', 'Privacy policy question'],
           ['billing_privacy', 'Purchase or billing privacy question'],
           ['compliance', 'Compliance or legal request'],
@@ -109,11 +110,12 @@ const CONTACT_CONTEXTS = {
         label: 'Privacy',
         recipient: 'privacy',
         inboxLabel: 'Stealthy Apps privacy inbox',
-        routeNote: 'This goes straight to my privacy inbox.',
+        routeNote:
+          'This goes straight to my privacy inbox. If a product stores data on your device, I can explain the policy and deletion steps, but I cannot remove that local data remotely.',
         reasons: [
-          ['privacy_question', 'Privacy question'],
-          ['data_request', 'Data or deletion request'],
-          ['policy', 'Policy question'],
+          ['privacy_question', 'Privacy or policy question'],
+          ['local_data', 'Question about local data or deletion'],
+          ['compliance', 'Compliance or legal request'],
           ['other_privacy', 'Other privacy matter'],
         ],
       },
