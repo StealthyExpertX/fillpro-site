@@ -35,13 +35,15 @@ const WEBMAIL_PROVIDERS = {
   },
 };
 
+const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
+
 const CONTACT_CONTEXTS = {
   support: {
     subjectPrefix: 'FillPro',
     requireName: false,
     requireReplyEmail: false,
     idleMessage:
-      'Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.',
+      'Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.',
     topics: {
       support: {
         label: 'Support',
@@ -85,7 +87,7 @@ const CONTACT_CONTEXTS = {
     requireName: true,
     requireReplyEmail: true,
     idleMessage:
-      'Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.',
+      'Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.',
     topics: {
       general: {
         label: 'General',
@@ -141,7 +143,14 @@ function findReasonLabel(config, reasonValue) {
   return match ? match[1] : config.reasons[0][1];
 }
 
-function buildComposePayload(context, config, reasonLabel, name, replyEmail, message) {
+function buildComposePayload(
+  context,
+  config,
+  reasonLabel,
+  name,
+  replyEmail,
+  message,
+) {
   const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
   const subject = `${context.subjectPrefix} ${config.label}: ${reasonLabel}`;
   const body = [
@@ -162,6 +171,33 @@ function buildComposePayload(context, config, reasonLabel, name, replyEmail, mes
     mailto:
       `mailto:${recipient}?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body.slice(0, 3200))}`,
+  };
+}
+
+function buildDirectSendPayload(
+  compose,
+  config,
+  reasonLabel,
+  name,
+  replyEmail,
+  message,
+  honeypotValue,
+) {
+  return {
+    endpoint: `${DIRECT_SEND_URL_BASE}${encodeURIComponent(compose.to)}`,
+    body: {
+      name: name || 'Not provided',
+      email: replyEmail,
+      topic: config.label,
+      reason: reasonLabel,
+      page: window.location.href,
+      message,
+      details: compose.body,
+      _subject: compose.subject,
+      _replyto: replyEmail,
+      _template: 'table',
+      _honey: honeypotValue || '',
+    },
   };
 }
 
@@ -192,6 +228,36 @@ function setStatus(statusNode, state, text) {
   statusNode.textContent = text;
 }
 
+async function sendDirectMessage(payload) {
+  const response = await fetch(payload.endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(payload.body),
+  });
+
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(
+      (data && data.message) || 'Direct send is unavailable right now.',
+    );
+  }
+
+  if (
+    data &&
+    Object.prototype.hasOwnProperty.call(data, 'success') &&
+    data.success !== true &&
+    data.success !== 'true'
+  ) {
+    throw new Error(data.message || 'Direct send is unavailable right now.');
+  }
+
+  return data;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('[data-contact-form]');
   if (!form) {
@@ -211,6 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailOptions = form.querySelector('[data-email-options]');
   const composeSummary = form.querySelector('[data-compose-summary]');
   const copyButton = form.querySelector('[data-compose-copy]');
+  const directConsentField = form.querySelector('[data-direct-consent]');
+  const honeypotField = form.querySelector('[data-contact-honey]');
+  const actionButtons = form.querySelectorAll('[data-contact-action]');
   let currentCompose = null;
 
   if (
@@ -258,11 +327,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (composeSummary) {
-      composeSummary.textContent =
-        `Prepared for ${compose.to}. Use the buttons below to open your default mail app, Gmail, Outlook, Yahoo, or copy the message.`;
+      composeSummary.textContent = `Prepared for ${compose.to}. Use the buttons below if you prefer your own email app instead of direct site delivery.`;
     }
 
     emailOptions.hidden = false;
+  }
+
+  function setActionState(isBusy) {
+    actionButtons.forEach((button) => {
+      button.disabled = isBusy;
+
+      if (isBusy) {
+        button.setAttribute('aria-busy', 'true');
+      } else {
+        button.removeAttribute('aria-busy');
+      }
+    });
   }
 
   function updateTopicState() {
@@ -300,7 +380,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyButton) {
     copyButton.addEventListener('click', async () => {
       if (!currentCompose) {
-        setStatus(statusNode, 'error', 'Prepare the message first, then use copy if you need it.');
+        setStatus(
+          statusNode,
+          'error',
+          'Prepare the message first, then use copy if you need it.',
+        );
         return;
       }
 
@@ -318,15 +402,30 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error('Copy failed');
         }
 
-        setStatus(statusNode, 'success', 'Email details copied. Paste them into any mail app if you prefer.');
+        setStatus(
+          statusNode,
+          'success',
+          'Email details copied. Paste them into any mail app if you prefer.',
+        );
       } catch (error) {
-        setStatus(statusNode, 'error', 'Copy failed here. Use the Gmail, Outlook, Yahoo, or default mail app buttons instead.');
+        setStatus(
+          statusNode,
+          'error',
+          'Copy failed here. Use the Gmail, Outlook, Yahoo, or default mail app buttons instead.',
+        );
       }
     });
   }
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    const requestedAction =
+      event.submitter && event.submitter.dataset.contactAction
+        ? event.submitter.dataset.contactAction
+        : directConsentField && directConsentField.checked
+          ? 'direct'
+          : 'compose';
 
     const topic = topicField.value;
     const reason = reasonField.value;
@@ -334,18 +433,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const message = messageField.value.trim();
     const replyEmail = replyField.value.trim();
     const name = nameField.value.trim();
+    const needsDirectReplyEmail = requestedAction === 'direct';
 
     if (context.requireName && !name) {
-      setStatus(statusNode, 'error', 'Add your name before choosing an email app.');
+      setStatus(
+        statusNode,
+        'error',
+        requestedAction === 'direct'
+          ? 'Add your name before sending directly.'
+          : 'Add your name before choosing an email app.',
+      );
       nameField.focus();
       return;
     }
 
-    if (context.requireReplyEmail && !replyEmail) {
+    if ((context.requireReplyEmail || needsDirectReplyEmail) && !replyEmail) {
       setStatus(
         statusNode,
         'error',
-        'Add your email before choosing an email app.',
+        requestedAction === 'direct'
+          ? 'Add your email before sending directly so I can reply.'
+          : 'Add your email before choosing an email app.',
       );
       replyField.focus();
       return;
@@ -355,7 +463,9 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Use a valid email address before choosing an email app.',
+        requestedAction === 'direct'
+          ? 'Use a valid email address before sending directly.'
+          : 'Use a valid email address before choosing an email app.',
       );
       replyField.focus();
       return;
@@ -365,8 +475,20 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Pick a topic, pick a reason, and write a short message before choosing an email app.',
+        requestedAction === 'direct'
+          ? 'Pick a topic, pick a reason, and write a short message before sending directly.'
+          : 'Pick a topic, pick a reason, and write a short message before choosing an email app.',
       );
+      return;
+    }
+
+    if (requestedAction === 'direct' && directConsentField && !directConsentField.checked) {
+      setStatus(
+        statusNode,
+        'error',
+        'Confirm the direct-send notice before sending straight to my inbox.',
+      );
+      directConsentField.focus();
       return;
     }
 
@@ -380,12 +502,64 @@ document.addEventListener('DOMContentLoaded', () => {
       message,
     );
 
-    showEmailOptions(compose);
+    if (requestedAction === 'compose') {
+      showEmailOptions(compose);
 
+      setStatus(
+        statusNode,
+        'success',
+        'Choose your email app below. Default mail app, Gmail, Outlook, Yahoo, and copy fallback are ready.',
+      );
+      return;
+    }
+
+    if (typeof fetch !== 'function') {
+      setStatus(
+        statusNode,
+        'error',
+        'Direct send is not supported in this browser. Use Choose Email App instead.',
+      );
+      return;
+    }
+
+    const directPayload = buildDirectSendPayload(
+      compose,
+      config,
+      reasonLabel,
+      name,
+      replyEmail,
+      message,
+      honeypotField ? honeypotField.value.trim() : '',
+    );
+
+    hideEmailOptions();
+    setActionState(true);
     setStatus(
       statusNode,
-      'success',
-      'Choose your email app below. Default mail app, Gmail, Outlook, Yahoo, and copy fallback are ready.',
+      'idle',
+      'Sending directly to the selected inbox. Your email app will not open.',
     );
+
+    try {
+      await sendDirectMessage(directPayload);
+
+      form.reset();
+      updateTopicState();
+      hideEmailOptions();
+      setStatus(
+        statusNode,
+        'success',
+        `Sent directly to ${compose.to}. No email app was opened. Watch for a reply at ${replyEmail}.`,
+      );
+    } catch (error) {
+      showEmailOptions(compose);
+      setStatus(
+        statusNode,
+        'error',
+        `${error.message} If you need to keep moving, use Choose Email App below instead.`,
+      );
+    } finally {
+      setActionState(false);
+    }
   });
 });

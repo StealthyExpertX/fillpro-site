@@ -1048,6 +1048,45 @@ p {
   margin-top: 18px;
 }
 
+.direct-panel {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: calc(var(--radius) + 4px);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.direct-panel p {
+  margin: 0;
+}
+
+.consent-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  color: var(--soft);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.consent-check input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--brand);
+}
+
+.field-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .compose-panel {
   display: grid;
   gap: 12px;
@@ -1070,6 +1109,14 @@ p {
 
 .compose-panel .button {
   flex: 0 0 auto;
+}
+
+.button[disabled] {
+  opacity: 0.72;
+  cursor: wait;
+  transform: none;
+  pointer-events: none;
+  box-shadow: none;
 }
 
 .compose-intro,
